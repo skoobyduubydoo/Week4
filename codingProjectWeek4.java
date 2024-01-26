@@ -389,35 +389,35 @@ System.out.print("\n20. Write a method called willBuyDrink that takes a boolean 
 //////////////////////////////TASK////////////////////////////////
 /*
 System.out.println("\n21. Create a method of your own that solves a problem. In comments, write what the method does and why you created it:");
+                                        /////////////This method creates a game of BlackJack////////////////////
+                                        ////////I forgot to add comments before I recorded my video////////////
 
-     Scanner scanner = new Scanner(System.in);
+                                        
+     Scanner scanner = new Scanner(System.in);            /////////////////////////////Block 1///////////////////////////////
 
         
-        List<String> deck = initializeDeck();
-        Collections.shuffle(deck);
+        List<String> deck = initializeDeck();    //Creates a list of Strings called "deck" by calling the "initializeDeck" method from below. 
+        Collections.shuffle(deck);                //Uses the "shuffle()" method to shuffle the "deck" list.
 
         
-        List<String> userHand = dealCards(deck);
-        List<String> dealerHand = dealCards(deck);
-
+        List<String> userHand = dealCards(deck);    //Creates a list of Strings called "userHand" and uses "dealCards" method to apply two values from "deck" list to "userHand".
+        List<String> dealerHand = dealCards(deck);  //The same as userHand except utilizing a different variable and adding a second layer of output.       
         
         System.out.println("Welcome!\n The Game is 21 Blackjack.\nGood Luck!\n");
         System.out.println("Your hand: " + userHand);
         System.out.println("Dealer's hand: " + dealerHand.get(0) + " and [Hidden]");
 
      
-        userTurn(scanner, deck, userHand);
+        userTurn(scanner, deck, userHand); //As the program runs through this block sequentially, this line allows the user to act first. By creating "userHand" from "deck" and...
+                                            //...creating a user-input function.
+        dealerTurn(deck, dealerHand);    //Does the same as "userTurn" minus the scanner input function.
 
-        
-        dealerTurn(deck, dealerHand);
+        whoWon(userHand, dealerHand); //This line runs if/ when the user inputs "stay" as a command or the values output by the program exceed 21. The "whoWon" method will execute.
 
-        
-        whoWon(userHand, dealerHand);
-
-        scanner.close();
-}
-
-    private static List<String> initializeDeck() 
+        scanner.close(); //Ends the program.        //////////////////////////////////////////Block 1/////////////////////////////////////////////
+}                                                    
+                                                   
+    private static List<String> initializeDeck()     //////////////////////////////////////////Block 2////////////////////////////////////////////
 {
         List<String> deck = new ArrayList<>();
         String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -425,28 +425,29 @@ System.out.println("\n21. Create a method of your own that solves a problem. In 
         for (String rank : ranks) 
 {
             deck.add(rank);
-}
-
-        
+}                                      /////////////////////////////This block creates a standard playing card deck called "deck" and iterates three times...
+                                                   //...thereby creating four versions of each value from "ranks".///////////////////////////////////////////// 
         for (int i = 0; i < 3; i++) 
 {
             deck.addAll(List.copyOf(deck));
 }
 
-        return deck;
-}
+        return deck;                     //////////////////////////////////////////Block 2/////////////////////////////////////////////
+}                                            
 
-    private static List<String> dealCards(List<String> deck) 
+    
+    private static List<String> dealCards(List<String> deck)              //////////////////////////////////////////Block 3/////////////////////////////////////////////
 {
         List<String> hand = new ArrayList<>();
         for (int i = 0; i < 2; i++) 
-{
-            hand.add(deck.remove(0));
+{                                                            ////////////////This block goes through "deck" and selects two values. It then applies those values to "hand"...
+            hand.add(deck.remove(0));                                ///...and removes the values from "deck".
 }
         return hand;
-}
+}                                                    //////////////////////////////////////////Block 3/////////////////////////////////////////////
+    
 
-    private static void userTurn(Scanner scanner, List<String> deck, List<String> userHand) 
+    private static void userTurn(Scanner scanner, List<String> deck, List<String> userHand) ///////////////////////////////////////Block 4/////////////////////////////////////////////
 {
         while (theHandValue(userHand) < 21) 
 {
@@ -455,7 +456,7 @@ System.out.println("\n21. Create a method of your own that solves a problem. In 
             System.out.print("Do you want to hit or stay? ");
             String choice = scanner.nextLine().toLowerCase();
 
-            if ("hit".equals(choice)) 
+            if ("hit".equals(choice))                 ///////////////This block creates the 'hit/ stay' function of blackjack. This is how the user gets involved in the game./////////
 {
                 userHand.add(deck.remove(0));
 } 
@@ -468,29 +469,30 @@ System.out.println("\n21. Create a method of your own that solves a problem. In 
                 System.out.println("Invalid choice. Please enter 'hit' or 'stay'.");
 }
 }
-}
+}                                                             //////////////////////////////////////////Block 4/////////////////////////////////////////////
+    
 
-    private static void dealerTurn(List<String> deck, List<String> dealerHand) 
+    private static void dealerTurn(List<String> deck, List<String> dealerHand) //////////////////////////////////////////Block 5/////////////////////////////////////////////
 {
         while (theHandValue(dealerHand) < 17) 
 {
-            dealerHand.add(deck.remove(0));
+            dealerHand.add(deck.remove(0));      //////This block defines the behavior of "dealer". So long as the dealer's cards equal less than 17, it will pull another card./////
 }
 
         System.out.println("Dealer's hand: " + dealerHand);
-        System.out.println("Dealer's total: " + theHandValue(dealerHand));
+        System.out.println("Dealer's total: " + theHandValue(dealerHand));    /////////////////////Block 5///////////////////////////
 }
 
-    private static int theHandValue(List<String> hand) 
+    private static int theHandValue(List<String> hand)                 //////////////////////////////////////Block 6///////////////////////////////////////
 {
         int value = 0;
         int numAces = 0;
 
-        for (String card : hand) 
+        for (String card : hand)                          ///////This block creates values for the high cards (A, K, Q, J)///////////////////////
 {
             if (card.equals("A")) 
 {
-                value += 11;
+                value += 11;            ///////This block is also where the arithmatic happens. Card values are added together.///////////////////
                 numAces++;
 } 
             else if (card.equals("K") || card.equals("Q") || card.equals("J")) 
@@ -498,8 +500,8 @@ System.out.println("\n21. Create a method of your own that solves a problem. In 
                 value += 10;
 }           else 
 {
-                value += Integer.parseInt(card);
-}
+                value += Integer.parseInt(card);        //////This line in particular creates values for the rest of the deck by telling the system to assume the name of the...
+}                                                        //...of the card is also an Int value.//////////
 }
 
         while (value > 21 && numAces > 0) 
@@ -508,15 +510,15 @@ System.out.println("\n21. Create a method of your own that solves a problem. In 
             numAces--;
 }
 
-        return value;
-}
+        return value;                                        //////////////////////////////////////////Block 6/////////////////////////////////////////////
+}    
 
-    private static void whoWon(List<String> userHand, List<String> dealerHand) 
+    private static void whoWon(List<String> userHand, List<String> dealerHand) ///////////////////////Block 7//////////////////////////////////////////////
 {
         int userTotal = theHandValue(userHand);
         int dealerTotal = theHandValue(dealerHand);
 
-        System.out.println("\nYour hand: " + userHand);
+        System.out.println("\nYour hand: " + userHand);      ////////This block creates a method to define the game winner. Here, hand values are attached to outputs./////////
         System.out.println("Your total: " + userTotal);
         System.out.println("Dealer's hand: " + dealerHand);
         System.out.println("Dealer's total: " + dealerTotal);
@@ -529,9 +531,9 @@ System.out.println("\n21. Create a method of your own that solves a problem. In 
 {
             System.out.println("\nCongratulations! You win!");
 
-*/
 
-}
+
+}                                                    //////////////////////////////////////////////////Block 7/////////////////////////////////////////////////////
 }
 
 
